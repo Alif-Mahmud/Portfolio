@@ -9,7 +9,7 @@
   --font:'Space Grotesk',sans-serif;--font2:'Inter',sans-serif;
   --radius:12px;--radius2:20px;--transition:0.3s ease;
 }
-html{scroll-behavior:smooth;font-size:16px;}
+html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden;}
 body{background:var(--bg);color:var(--white);font-family:var(--font2);overflow-x:hidden;cursor:none;background-image:radial-gradient(ellipse 80% 40% at 50% -5%,rgba(0,229,160,0.06),transparent),radial-gradient(ellipse 60% 30% at 100% 100%,rgba(168,85,247,0.05),transparent);}
 a{text-decoration:none;color:inherit;}
 ul{list-style:none;}
@@ -311,28 +311,151 @@ img{max-width:100%;}
 @keyframes particleFloat{0%{transform:translateY(100vh) translateX(0);opacity:0;}10%{opacity:0.6;}90%{opacity:0.3;}100%{transform:translateY(-100px) translateX(100px);opacity:0;}}
 
 /* ===== RESPONSIVE ===== */
+
+/* Tablet — 1024px */
 @media(max-width:1024px){
-  .about-grid{grid-template-columns:1fr;}
-  .about-visual{display:none;}
-  .skills-categories{grid-template-columns:1fr;}
-  .portfolio-grid{grid-template-columns:repeat(2,1fr);}
-  .achievements-grid{grid-template-columns:repeat(2,1fr);}
-  .contact-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .about-visual{display:flex;justify-content:center;}
+  .about-img-wrapper{width:280px;height:320px;margin:0 auto;}
+  .skills-categories{grid-template-columns:1fr 1fr;gap:20px;}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr);gap:20px;}
+  .achievements-grid{grid-template-columns:repeat(2,1fr);gap:20px;}
+  .contact-grid{grid-template-columns:1fr;gap:32px;}
+  .hero-name{font-size:clamp(40px,7vw,72px);}
 }
+
+/* Mobile — 768px */
 @media(max-width:768px){
+  /* Cursor — disable on touch */
+  .cursor-dot,.cursor-ring{display:none;}
+
+  /* Loader */
+  .loader-logo{font-size:36px;}
+  .loader-bar-wrap{width:160px;}
+
+  /* Navbar */
   .nav-links,.btn-cv{display:none;}
-  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(8,11,18,0.98);backdrop-filter:blur(20px);padding:24px;border-bottom:1px solid var(--glass-border);gap:20px;}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:absolute;top:100%;left:0;right:0;
+    background:rgba(2,8,16,0.98);backdrop-filter:blur(20px);
+    padding:24px;border-bottom:1px solid var(--glass-border);gap:16px;
+    z-index:999;
+  }
+  [data-theme="light"] .nav-links.open{background:rgba(240,253,248,0.98);}
   .hamburger{display:flex;}
-  .portfolio-grid{grid-template-columns:1fr;}
-  .achievements-grid{grid-template-columns:1fr;}
-  .footer-top{flex-direction:column;align-items:flex-start;}
-  .hero-stats{gap:24px;}
+  .theme-toggle{width:36px;height:36px;font-size:14px;}
+
+  /* Hero */
+  .hero{padding:110px 20px 70px;text-align:center;}
+  .hero-name{font-size:clamp(36px,10vw,56px);letter-spacing:-1px;}
+  .hero-roles{font-size:clamp(16px,4vw,20px);}
+  .hero-intro{font-size:14px;padding:0 8px;}
+  .hero-badge{font-size:12px;padding:6px 14px;}
+  .hero-cta{flex-direction:column;align-items:center;gap:12px;margin-bottom:40px;}
+  .btn-primary,.btn-secondary{width:100%;max-width:280px;justify-content:center;}
+  .hero-stats{gap:20px;flex-wrap:wrap;}
+  .stat-num{font-size:32px;}
   .stat-divider{display:none;}
+  .hero-scroll{bottom:20px;}
   .floating-card{display:none;}
+
+  /* About */
+  .about-grid{grid-template-columns:1fr;gap:32px;}
+  .about-visual{justify-content:center;}
+  .about-img-wrapper{width:240px;height:280px;}
+  .about-heading{font-size:clamp(22px,5vw,30px);}
+  .about-info-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .card-left,.card-1,.card-2{display:none;}
+
+  /* Skills */
+  .skills-categories{grid-template-columns:1fr;gap:16px;}
+  .skill-category{padding:24px 20px;}
+  .skill-tags{gap:8px;}
+  .skill-tag{font-size:12px;padding:6px 12px;}
+  .tools-grid{gap:10px;}
+  .tool-item{padding:16px 14px;min-width:80px;}
+  .tool-item i{font-size:20px;}
+  .tool-item span{font-size:11px;}
+  .tools-title{font-size:20px;}
+
+  /* Portfolio */
+  .portfolio-grid{grid-template-columns:1fr;gap:16px;}
+  .portfolio-tabs{gap:8px;}
+  .tab-btn{padding:8px 16px;font-size:13px;}
+
+  /* Achievements */
+  .achievements-grid{grid-template-columns:1fr;gap:14px;}
+  .achievement-card{padding:20px 16px;gap:14px;}
+  .achievement-icon{width:44px;height:44px;min-width:44px;font-size:18px;}
+  .achievement-content h3{font-size:14px;}
+  .achievement-content p{font-size:12px;}
+
+  /* Contact */
+  .contact-grid{grid-template-columns:1fr;gap:24px;}
+  .contact-card{padding:24px 20px;}
+  .social-links{flex-wrap:wrap;gap:10px;}
+  .social-link{width:40px;height:40px;font-size:14px;}
+
+  /* Footer */
+  .footer-top{flex-direction:column;align-items:flex-start;gap:20px;}
+  .footer-links{flex-wrap:wrap;gap:16px;}
+  .footer-links a{font-size:13px;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+
+  /* Section headers */
+  .section-title{font-size:clamp(26px,6vw,40px);}
+  .section-tag{font-size:11px;letter-spacing:2px;}
+  .section{padding:72px 0;}
 }
+
+/* Small Mobile — 480px */
 @media(max-width:480px){
-  .section{padding:70px 0;}
+  .section{padding:60px 0;}
+  .container{padding:0 16px;}
+
+  /* Hero */
   .hero{padding:100px 16px 60px;}
-  .hero-cta{flex-direction:column;align-items:stretch;}
-  .btn-primary,.btn-secondary{justify-content:center;}
+  .hero-name{font-size:clamp(30px,9vw,46px);}
+
+  /* About */
+  .about-img-wrapper{width:200px;height:240px;}
+  .about-info-grid{grid-template-columns:1fr;gap:10px;}
+
+  /* Skills */
+  .skill-tag{font-size:11px;padding:5px 10px;}
+
+  /* Achievements */
+  .achievement-card{padding:16px 14px;gap:12px;flex-wrap:wrap;}
+  .achievement-icon{width:40px;height:40px;min-width:40px;font-size:16px;}
+
+  /* Contact */
+  .contact-detail-item{padding:10px 12px;}
+  .form-group input,.form-group textarea{padding:12px 14px;font-size:13px;}
+  .btn-primary{font-size:14px;padding:12px 20px;}
+
+  /* Loader */
+  .loader-logo{font-size:28px;letter-spacing:2px;}
+  .loader-tagline{font-size:11px;letter-spacing:2px;}
+  .loader-bar-wrap{width:130px;}
+
+  /* Navbar */
+  .nav-container{padding:0 16px;}
+  .nav-logo{font-size:18px;}
+}
+
+/* Very Small — 360px */
+@media(max-width:360px){
+  .hero-name{font-size:28px;}
+  .hero-roles{font-size:15px;}
+  .about-img-wrapper{width:170px;height:200px;}
+  .skills-categories{grid-template-columns:1fr;}
+  .tool-item{min-width:70px;padding:12px 10px;}
+}
+
+/* Touch devices — disable custom cursor */
+@media(hover:none){
+  .cursor-dot,.cursor-ring{display:none !important;}
+  *{cursor:auto !important;}
+  a,button,[role="button"]{cursor:pointer !important;}
 }
