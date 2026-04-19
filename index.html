@@ -291,106 +291,153 @@
         <button class="tab-btn" data-tab="video">Video Editing</button>
         <button class="tab-btn" data-tab="academic">Academic</button>
       </div>
-      <div class="portfolio-grid" id="portfolioGrid">
-
-        <div class="project-card" data-category="design">
-          <div class="project-thumb design-thumb-1">
-            <div class="thumb-overlay">
-              <div class="thumb-icon"><i class="fas fa-expand-alt"></i></div>
-            </div>
-            <span class="project-cat-badge">Graphic Design</span>
-          </div>
-          <div class="project-info">
-            <h3>Corporate Brand Identity</h3>
-            <p>Complete branding package — logo, color palette, typography, and brand guidelines for a tech startup.</p>
-            <div class="project-tags">
-              <span>Branding</span><span>Illustrator</span><span>Photoshop</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card" data-category="design">
-          <div class="project-thumb design-thumb-2">
-            <div class="thumb-overlay">
-              <div class="thumb-icon"><i class="fas fa-expand-alt"></i></div>
-            </div>
-            <span class="project-cat-badge">Graphic Design</span>
-          </div>
-          <div class="project-info">
-            <h3>Event Poster Series</h3>
-            <p>A premium series of cinematic event posters with advanced compositing and visual storytelling.</p>
-            <div class="project-tags">
-              <span>Poster</span><span>Compositing</span><span>Typography</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card" data-category="video">
-          <div class="project-thumb video-thumb-1">
-            <div class="thumb-overlay">
-              <div class="thumb-icon"><i class="fas fa-play-circle"></i></div>
-            </div>
-            <span class="project-cat-badge">Video Editing</span>
-          </div>
-          <div class="project-info">
-            <h3>Cinematic Brand Video</h3>
-            <p>High-impact brand video with dynamic motion graphics, color grading, and cinematic sound design.</p>
-            <div class="project-tags">
-              <span>Premiere Pro</span><span>After Effects</span><span>Color Grade</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card" data-category="video">
-          <div class="project-thumb video-thumb-2">
-            <div class="thumb-overlay">
-              <div class="thumb-icon"><i class="fas fa-play-circle"></i></div>
-            </div>
-            <span class="project-cat-badge">Video Editing</span>
-          </div>
-          <div class="project-info">
-            <h3>Motion Graphics Reel</h3>
-            <p>A compilation of motion graphic animations created for social media campaigns and digital advertising.</p>
-            <div class="project-tags">
-              <span>Motion Graphics</span><span>Animation</span><span>Social Media</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card" data-category="academic">
-          <div class="project-thumb academic-thumb-1">
-            <div class="thumb-overlay">
-              <div class="thumb-icon"><i class="fas fa-expand-alt"></i></div>
-            </div>
-            <span class="project-cat-badge">Academic</span>
-          </div>
-          <div class="project-info">
-            <h3>Avionics System Design</h3>
-            <p>Design and simulation of an Inertial Navigation System (INS) for UAV applications using MATLAB.</p>
-            <div class="project-tags">
-              <span>Avionics</span><span>MATLAB</span><span>UAV</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card" data-category="academic">
-          <div class="project-thumb academic-thumb-2">
-            <div class="thumb-overlay">
-              <div class="thumb-icon"><i class="fas fa-expand-alt"></i></div>
-            </div>
-            <span class="project-cat-badge">Academic</span>
-          </div>
-          <div class="project-info">
-            <h3>Aerodynamics Research</h3>
-            <p>Computational analysis of airfoil performance at various angles of attack using simulation software.</p>
-            <div class="project-tags">
-              <span>Aerodynamics</span><span>CFD</span><span>Research</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
+    <div class="full-carousel-section">
+      <div class="blur-arrow blur-arrow-left"><button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button></div>
+      <div class="portfolio-track-outer" id="portfolioOuter">
+        <div class="portfolio-grid" id="portfolioGrid">
+
+          <!-- DESIGN -->
+          <div class="project-card" data-category="design" onclick="openLightbox('logo.png','MATHELIC — Brand Identity System','A bold educational brand built around math symbolism. Integral for academics, Gear for engineering, Angle for precision, and Infinity for limitless growth.')">
+            <div class="project-thumb" style="background-image:url('logo.png');background-size:cover;background-position:center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Graphic Design</span>
+            </div>
+            <div class="project-info"><h3>MATHELIC — Brand Identity</h3><p>A concept-driven logo where every shape tells a story — integrals, gears, angles &amp; infinity merged into one iconic mark.</p>
+            <div class="project-tags"><span>Branding</span><span>Illustrator</span><span>Logo Design</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="design" onclick="openLightbox('profile.png','Rahman Ziad — Personal Brand Portrait','A signature personal branding card blending candid photography with institutional identity elements for a mechanical engineering student at CUET.')">
+            <div class="project-thumb" style="background-image:url('profile.png');background-size:cover;background-position:center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Graphic Design</span>
+            </div>
+            <div class="project-info"><h3>Personal Brand Portrait</h3><p>Where personality meets professionalism — a styled identity card combining portrait photography with university branding.</p>
+            <div class="project-tags"><span>Portrait</span><span>Photoshop</span><span>Branding</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="design" onclick="openLightbox('t shirt.jpg','AAUB Sports Jersey — Fly High, Fly Fast','Official team jersey designed for Aviation and Aerospace University Bangladesh. Fighter jets, cultural motifs, and institutional identity united in one striking kit.')">
+            <div class="project-thumb" style="background-image:url('t shirt.jpg');background-size:cover;background-position:center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Graphic Design</span>
+            </div>
+            <div class="project-info"><h3>AAUB Sports Jersey</h3><p>Fighter jets, cultural motifs, and institutional identity united into one striking aerospace-themed team kit.</p>
+            <div class="project-tags"><span>Apparel</span><span>Illustrator</span><span>Identity</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="design" onclick="openLightbox('Organisation.jpg','Drowning City — Climate Awareness Illustration','A haunting social awareness visual depicting a city sinking under floodwaters — a powerful message on climate inaction through digital illustration.')">
+            <div class="project-thumb" style="background-image:url('Organisation.jpg');background-size:cover;background-position:center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Graphic Design</span>
+            </div>
+            <div class="project-info"><h3>Drowning City — Climate Awareness</h3><p>A cinematic illustration portraying urban flooding and climate crisis — birds, buses, and skyscrapers consumed by rising waters.</p>
+            <div class="project-tags"><span>Illustration</span><span>Photoshop</span><span>Social Awareness</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="design" onclick="openLightbox('Festival.png','Aurora Festival — Event Identity Design','A vibrant festival identity system featuring aurora-inspired gradients, bold typography, and dynamic layout for a university cultural event.')">
+            <div class="project-thumb" style="background-image:url('Festival.png');background-size:cover;background-position:center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Graphic Design</span>
+            </div>
+            <div class="project-info"><h3>Aurora Festival — Event Identity</h3><p>A vibrant festival identity with aurora-inspired gradients and bold typography for a university cultural event.</p>
+            <div class="project-tags"><span>Event Design</span><span>Illustrator</span><span>Typography</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="design" onclick="openLightbox('poster.png','Research Visualized — Academic Poster Design','A meticulously designed academic research poster presenting complex aerospace data through clean layout, hierarchy, and data visualization techniques.')">
+            <div class="project-thumb" style="background-image:url('poster.png');background-size:cover;background-position:top center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Graphic Design</span>
+            </div>
+            <div class="project-info"><h3>Research Visualized — Academic Poster</h3><p>Complex aerospace data presented through clean layout, hierarchy, and data visualization for academic publication.</p>
+            <div class="project-tags"><span>Academic</span><span>Data Viz</span><span>Photoshop</span></div></div>
+          </div>
+
+          <!-- VIDEO -->
+          <div class="project-card video-card" data-category="video" onclick="openVideoLightbox('Personal Promotional Video.mp4','The Story Behind the Screen — Personal Brand Film','A cinematic personal brand film showcasing the journey, passion, and creative process of Alif Mahmud Bijoy — from engineering labs to creative studios.')">
+            <div class="project-thumb" style="background:#0a0a1a;overflow:hidden">
+              <video class="card-video-preview" src="Personal Promotional Video.mp4" muted loop playsinline preload="none"></video>
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-play"></i></div><div class="thumb-view-hint">Click to Play</div></div>
+              <span class="project-cat-badge">Video Editing</span>
+              <div class="video-progress"><div class="video-progress-bar"></div></div>
+            </div>
+            <div class="project-info"><h3>Personal Brand Film</h3><p>A cinematic personal brand film showcasing the journey from engineering labs to creative studios.</p>
+            <div class="project-tags"><span>Documentary</span><span>Premiere Pro</span><span>Personal Brand</span></div></div>
+          </div>
+
+          <div class="project-card video-card" data-category="video" onclick="openVideoLightbox('Project Airborne Phoenix.mp4','Project Airborne Phoenix — DBF Documentary','The official documentary of AAUB\'s Design/Build/Fly team — capturing the engineering process, team dynamics, and the thrill of competition flight.')">
+            <div class="project-thumb" style="background:#0a0a1a;overflow:hidden">
+              <video class="card-video-preview" src="Project Airborne Phoenix.mp4" muted loop playsinline preload="none"></video>
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-play"></i></div><div class="thumb-view-hint">Click to Play</div></div>
+              <span class="project-cat-badge">Video Editing</span>
+              <div class="video-progress"><div class="video-progress-bar"></div></div>
+            </div>
+            <div class="project-info"><h3>Project Airborne Phoenix — DBF</h3><p>Official documentary capturing the engineering process, team dynamics, and the thrill of competition flight at AAUB.</p>
+            <div class="project-tags"><span>Documentary</span><span>Cinematography</span><span>DBF</span></div></div>
+          </div>
+
+          <div class="project-card video-card" data-category="video" onclick="openVideoLightbox('Digital Product Promotion.mp4','Digital Motion — Product Showcase Film','A sleek digital product promotion video combining motion graphics, product reveals, and compelling visual storytelling for modern brand marketing.')">
+            <div class="project-thumb" style="background:#0a0a1a;overflow:hidden">
+              <video class="card-video-preview" src="Digital Product Promotion.mp4" muted loop playsinline preload="none"></video>
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-play"></i></div><div class="thumb-view-hint">Click to Play</div></div>
+              <span class="project-cat-badge">Video Editing</span>
+              <div class="video-progress"><div class="video-progress-bar"></div></div>
+            </div>
+            <div class="project-info"><h3>Digital Motion — Product Showcase</h3><p>Sleek product promotion video combining motion graphics, product reveals, and visual storytelling for modern brand marketing.</p>
+            <div class="project-tags"><span>Product Video</span><span>Motion Graphics</span><span>CapCut Pro</span></div></div>
+          </div>
+
+          <div class="project-card video-card" data-category="video" onclick="openVideoLightbox('Product Advertisement.mp4','Commercial Cut — Product Advertisement','A high-energy product advertisement built for social media virality — dynamic cuts, punchy sound design, and cinematic color grading.')">
+            <div class="project-thumb" style="background:#0a0a1a;overflow:hidden">
+              <video class="card-video-preview" src="Product Advertisement.mp4" muted loop playsinline preload="none"></video>
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-play"></i></div><div class="thumb-view-hint">Click to Play</div></div>
+              <span class="project-cat-badge">Video Editing</span>
+              <div class="video-progress"><div class="video-progress-bar"></div></div>
+            </div>
+            <div class="project-info"><h3>Commercial Cut — Advertisement</h3><p>High-energy product ad built for social media virality — dynamic cuts, punchy sound design, and cinematic color grading.</p>
+            <div class="project-tags"><span>Commercial</span><span>Advertisement</span><span>Premiere Pro</span></div></div>
+          </div>
+
+          <!-- ACADEMIC -->
+          <div class="project-card" data-category="academic" onclick="openLightbox('Matlab Report.png','MathWorks MATLAB Onramp — 100% Completion','Official MathWorks Training Services progress report certifying 100% completion of MATLAB Onramp — 14 chapters including arrays, plots, programming &amp; final project. Completed November 2025.')">
+            <div class="project-thumb" style="background-image:url('Matlab Report.png');background-size:cover;background-position:top center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Certificate</span>
+            </div>
+            <div class="project-info"><h3>MATLAB Onramp — 100% Complete</h3><p>Official MathWorks certificate — all 14 chapters including arrays, plots, programming &amp; final project.</p>
+            <div class="project-tags"><span>MATLAB</span><span>MathWorks</span><span>Certificate</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="academic" onclick="openLightbox('Project Team Flight Core.jpg','Certificate of Experience — Control Engineer, Team Flight Core','Frontier Alliance Certificate FA-2026-1203 certifying role as Control Engineer at Team Flight Core for UAV Algorithm Design at The Global Drone Virtual Competition 2026.')">
+            <div class="project-thumb" style="background-image:url('Project Team Flight Core.jpg');background-size:cover;background-position:center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Certificate</span>
+            </div>
+            <div class="project-info"><h3>Control Engineer — Team Flight Core</h3><p>Frontier Alliance certified experience as Control Engineer for UAV algorithm design at The Global Drone Virtual Competition 2026.</p>
+            <div class="project-tags"><span>UAV Control</span><span>Frontier Alliance</span><span>2026</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="academic" onclick="openLightbox('Simulink Report.png','MathWorks Simulink Onramp — 100% Completion','Official MathWorks Training Services progress report certifying 100% completion of Simulink Onramp — dynamic systems, discrete/continuous simulation, model-based design. Completed February 2026.')">
+            <div class="project-thumb" style="background-image:url('Simulink Report.png');background-size:cover;background-position:top center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Certificate</span>
+            </div>
+            <div class="project-info"><h3>Simulink Onramp — 100% Complete</h3><p>MathWorks certified full completion — dynamic systems, discrete/continuous simulation, and model-based design mastered.</p>
+            <div class="project-tags"><span>Simulink</span><span>MathWorks</span><span>Certificate</span></div></div>
+          </div>
+
+          <div class="project-card" data-category="academic" onclick="openLightbox('Project Team The Electrode Code.png','Certificate — Commercial Strategist &amp; Video Editor, The Electrode Code','Frontier Alliance Certificate FA-2026-1104 certifying role as Commercial Strategist &amp; Video Editor at Team Pulse Dynamics for The Electrode Code competition, 2025–2026.')">
+            <div class="project-thumb" style="background-image:url('Project Team The Electrode Code.png');background-size:cover;background-position:center">
+              <div class="thumb-overlay"><div class="thumb-icon"><i class="fas fa-expand-alt"></i></div><div class="thumb-view-hint">Click to View</div></div>
+              <span class="project-cat-badge">Certificate</span>
+            </div>
+            <div class="project-info"><h3>Commercial Strategist — The Electrode Code</h3><p>Frontier Alliance certified as Commercial Strategist &amp; Video Editor at Team Pulse Dynamics for The Electrode Code, 2025–2026.</p>
+            <div class="project-tags"><span>Video Strategy</span><span>Frontier Alliance</span><span>2026</span></div></div>
+          </div>
+
+        </div><!-- /portfolio-grid -->
+      </div><!-- /portfolioOuter -->
+      <div class="blur-arrow blur-arrow-right"><button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button></div>
+    </div><!-- /full-carousel-section -->
   </section>
 
   <!-- Achievements Section -->
@@ -398,9 +445,13 @@
     <div class="container">
       <div class="section-header reveal-zoom">
         <span class="section-tag">Recognition</span>
-        <h2 class="section-title">Achievements & <span class="accent">Certifications</span></h2>
+        <h2 class="section-title">Achievements &amp; <span class="accent">Certifications</span></h2>
       </div>
-      <div class="achievements-grid">
+    </div>
+    <div class="full-carousel-section">
+      <div class="blur-arrow blur-arrow-left"><button class="carousel-arrow carousel-prev" id="achPrev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button></div>
+      <div class="portfolio-track-outer" id="achOuter">
+        <div class="achievements-grid" id="achGrid">
 
         <!-- ====== 2025 ====== -->
 
@@ -546,9 +597,29 @@
           </div>
         </div>
 
+        </div><!-- /achGrid -->
+      </div><!-- /achOuter -->
+      <div class="blur-arrow blur-arrow-right"><button class="carousel-arrow carousel-next" id="achNext" aria-label="Next"><i class="fas fa-chevron-right"></i></button></div>
+    </div><!-- /full-carousel-section -->
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
+    <div class="lightbox-modal">
+      <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close"><i class="fas fa-times"></i></button>
+      <div class="lightbox-img-wrap" id="lightboxImgWrap">
+        <img id="lightboxImg" src="" alt="" />
+      </div>
+      <div class="lightbox-video-wrap" id="lightboxVideoWrap" style="display:none">
+        <video id="lightboxVideo" controls style="width:100%;max-height:60vh;"></video>
+      </div>
+      <div class="lightbox-info">
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxDesc"></p>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Contact Section -->
   <section class="contact section" id="contact">

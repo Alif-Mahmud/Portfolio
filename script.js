@@ -52,15 +52,28 @@ function animateRing() {
 animateRing();
 
 // Hover state on interactive elements
-const interactables = 'a, button, .project-card, .tool-item, .skill-tag, .achievement-card, .social-link, input, textarea, .tab-btn, .theme-toggle';
+const interactables = 'a, button, .project-card, .tool-item, .skill-tag, .achievement-card, .social-link, input, textarea, .tab-btn, .theme-toggle, .lightbox-backdrop, .lightbox-close, .lightbox-modal';
 document.querySelectorAll(interactables).forEach(el => {
   el.addEventListener('mouseenter', () => { dot.classList.add('hovered'); ring.classList.add('hovered'); });
   el.addEventListener('mouseleave', () => { dot.classList.remove('hovered'); ring.classList.remove('hovered'); });
 });
 
-// Click state
+// Re-attach interactables after lightbox opens (dynamic elements)
+function refreshCursorInteractables() {
+  document.querySelectorAll(interactables).forEach(el => {
+    el.removeEventListener('mouseenter', cursorHoverOn);
+    el.removeEventListener('mouseleave', cursorHoverOff);
+    el.addEventListener('mouseenter', cursorHoverOn);
+    el.addEventListener('mouseleave', cursorHoverOff);
+  });
+}
+function cursorHoverOn()  { dot.classList.add('hovered');    ring.classList.add('hovered'); }
+function cursorHoverOff() { dot.classList.remove('hovered'); ring.classList.remove('hovered'); }
+
+// Click state — always clean up on mouseup regardless of target
 document.addEventListener('mousedown', () => { dot.classList.add('clicking'); ring.classList.add('clicking'); });
 document.addEventListener('mouseup',   () => { dot.classList.remove('clicking'); ring.classList.remove('clicking'); });
+window.addEventListener('blur',        () => { dot.classList.remove('clicking'); ring.classList.remove('clicking'); });
 
 // Hide when leaving window
 document.addEventListener('mouseleave', () => { dot.style.opacity = '0'; ring.style.opacity = '0'; });
@@ -215,31 +228,119 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-// ===== PORTFOLIO TABS =====
+// ===== PORTFOLIO CAROUSEL =====
+const portfolioGrid  = document.getElementById('portfolioGrid');
+const portfolioOuter = document.getElementById('portfolioOuter');
+const prevBtn = document.getElementById('carouselPrev');
+const nextBtn = document.getElementById('carouselNext');
 const tabBtns = document.querySelectorAll('.tab-btn');
-const projectCards = document.querySelectorAll('.project-card');
+let allCards = Array.from(document.querySelectorAll('.project-card'));
+
+// Shuffle cards randomly in DOM
+function shuffleCards(grid, cards) {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    grid.appendChild(cards[j]);
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+}
+shuffleCards(portfolioGrid, allCards);
+
+const SCROLL_SPEED = 0.55; // slow visible drift
+
+function getCardStep(outer) {
+  const card = outer.querySelector('.project-card, .achievement-card');
+  if (!card) return 320;
+  const style = window.getComputedStyle(outer.firstElementChild);
+  const gap = parseInt(style.gap) || 20;
+  return card.offsetWidth + gap;
+}
+
+// --- Portfolio auto-scroll ---
+let portPaused = false;
+function portAutoScroll() {
+  if (!portPaused) {
+    portfolioOuter.scrollLeft += SCROLL_SPEED;
+    if (portfolioOuter.scrollLeft >= portfolioOuter.scrollWidth - portfolioOuter.clientWidth - 2)
+      portfolioOuter.scrollLeft = 0;
+  }
+  requestAnimationFrame(portAutoScroll);
+}
+portfolioOuter.addEventListener('mouseenter', () => portPaused = true);
+portfolioOuter.addEventListener('mouseleave', () => portPaused = false);
+prevBtn.addEventListener('click', () => {
+  portPaused = true;
+  portfolioOuter.scrollBy({ left: -getCardStep(portfolioOuter), behavior: 'smooth' });
+  setTimeout(() => portPaused = false, 700);
+});
+nextBtn.addEventListener('click', () => {
+  portPaused = true;
+  portfolioOuter.scrollBy({ left: getCardStep(portfolioOuter), behavior: 'smooth' });
+  setTimeout(() => portPaused = false, 700);
+});
+
+// Drag-to-scroll (portfolio)
+let portDrag = false, portStartX = 0, portStartScroll = 0;
+portfolioGrid.addEventListener('mousedown', e => { portDrag=true; portPaused=true; portStartX=e.pageX; portStartScroll=portfolioOuter.scrollLeft; portfolioGrid.style.cursor='grabbing'; });
+document.addEventListener('mousemove', e => { if(portDrag) portfolioOuter.scrollLeft = portStartScroll-(e.pageX-portStartX); });
+document.addEventListener('mouseup', () => { if(portDrag){portDrag=false;portPaused=false;portfolioGrid.style.cursor='grab';} });
+
+// Tab filter
 tabBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     tabBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const tab = btn.dataset.tab;
-    projectCards.forEach(card => {
+    allCards.forEach(card => {
       const show = tab === 'all' || card.dataset.category === tab;
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.95)';
-      if (show) {
-        card.classList.remove('hidden');
-        setTimeout(() => {
-          card.style.opacity = '1';
-          card.style.transform = 'scale(1)';
-          card.style.transition = 'all 0.4s ease';
-        }, 50);
-      } else {
-        setTimeout(() => card.classList.add('hidden'), 400);
-      }
+      card.classList.toggle('hidden', !show);
     });
+    portfolioOuter.scrollLeft = 0;
   });
 });
+portAutoScroll();
+
+// ===== ACHIEVEMENTS CAROUSEL =====
+const achGrid  = document.getElementById('achGrid');
+const achOuter = document.getElementById('achOuter');
+const achPrev  = document.getElementById('achPrev');
+const achNext  = document.getElementById('achNext');
+
+if (achGrid && achOuter) {
+  let achCards = Array.from(achGrid.querySelectorAll('.achievement-card'));
+  shuffleCards(achGrid, achCards);
+
+  let achPaused = false;
+  function achAutoScroll() {
+    if (!achPaused) {
+      achOuter.scrollLeft += SCROLL_SPEED;
+      if (achOuter.scrollLeft >= achOuter.scrollWidth - achOuter.clientWidth - 2)
+        achOuter.scrollLeft = 0;
+    }
+    requestAnimationFrame(achAutoScroll);
+  }
+  achOuter.addEventListener('mouseenter', () => achPaused = true);
+  achOuter.addEventListener('mouseleave', () => achPaused = false);
+  achPrev.addEventListener('click', () => {
+    achPaused = true;
+    achOuter.scrollBy({ left: -getCardStep(achOuter), behavior: 'smooth' });
+    setTimeout(() => achPaused = false, 700);
+  });
+  achNext.addEventListener('click', () => {
+    achPaused = true;
+    achOuter.scrollBy({ left: getCardStep(achOuter), behavior: 'smooth' });
+    setTimeout(() => achPaused = false, 700);
+  });
+
+  // Drag-to-scroll (achievements)
+  let achDrag = false, achStartX = 0, achStartScroll = 0;
+  achGrid.addEventListener('mousedown', e => { achDrag=true; achPaused=true; achStartX=e.pageX; achStartScroll=achOuter.scrollLeft; achGrid.style.cursor='grabbing'; });
+  document.addEventListener('mousemove', e => { if(achDrag) achOuter.scrollLeft = achStartScroll-(e.pageX-achStartX); });
+  document.addEventListener('mouseup', () => { if(achDrag){achDrag=false;achPaused=false;achGrid.style.cursor='grab';} });
+
+  achAutoScroll();
+}
+
 
 // ===== EMAILJS SETUP =====
 // ⚠️  PASTE YOUR KEYS BELOW (see setup guide)
@@ -308,12 +409,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ===== PROJECT CARD TRANSITIONS =====
-projectCards.forEach(card => {
-  card.style.transition = 'all 0.4s ease';
-  card.style.opacity = '1';
-  card.style.transform = 'scale(1)';
-});
+
 
 // ===== BACK TO TOP =====
 document.getElementById('backToTop').addEventListener('click', e => {
@@ -322,4 +418,69 @@ document.getElementById('backToTop').addEventListener('click', e => {
 });
 
 // CV links directly to CV.pdf - no handler needed
+
+// ===== LIGHTBOX (Image + Video) =====
+const lightbox         = document.getElementById('lightbox');
+const lightboxImg      = document.getElementById('lightboxImg');
+const lightboxImgWrap  = document.getElementById('lightboxImgWrap');
+const lightboxVideo    = document.getElementById('lightboxVideo');
+const lightboxVideoWrap= document.getElementById('lightboxVideoWrap');
+const lightboxTitle    = document.getElementById('lightboxTitle');
+const lightboxDesc     = document.getElementById('lightboxDesc');
+
+function openLightbox(src, title, desc) {
+  lightboxImgWrap.style.display  = '';
+  lightboxVideoWrap.style.display= 'none';
+  lightboxImg.src           = src;
+  lightboxImg.alt           = title;
+  lightboxTitle.textContent = title;
+  lightboxDesc.textContent  = desc;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  dot.classList.remove('clicking'); ring.classList.remove('clicking');
+  refreshCursorInteractables();
+}
+
+function openVideoLightbox(src, title, desc) {
+  lightboxImgWrap.style.display  = 'none';
+  lightboxVideoWrap.style.display= '';
+  lightboxVideo.src         = src;
+  lightboxTitle.textContent = title;
+  lightboxDesc.textContent  = desc;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  dot.classList.remove('clicking'); ring.classList.remove('clicking');
+  refreshCursorInteractables();
+  lightboxVideo.play();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  dot.classList.remove('clicking','hovered'); ring.classList.remove('clicking','hovered');
+  setTimeout(() => {
+    lightboxImg.src   = '';
+    lightboxVideo.pause();
+    lightboxVideo.src = '';
+  }, 350);
+}
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ===== VIDEO CARD HOVER PREVIEW =====
+document.querySelectorAll('.video-card').forEach(card => {
+  const vid = card.querySelector('.preview-video');
+  if (!vid) return;
+  card.addEventListener('mouseenter', () => {
+    vid.currentTime = 0;
+    vid.play().catch(() => {});
+  });
+  card.addEventListener('mouseleave', () => {
+    vid.pause();
+    vid.currentTime = 0;
+  });
+});
 
