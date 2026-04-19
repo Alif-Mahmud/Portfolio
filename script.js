@@ -181,14 +181,36 @@ const counterObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.hero-stats').forEach(el => counterObserver.observe(el));
 
-// ===== PARALLAX SCROLL =====
-const heroContent = document.querySelector('.hero-content');
-const orbs = document.querySelectorAll('.orb');
+// ===== HERO SCROLL FADE =====
+const heroSection  = document.querySelector('.hero');
+const heroContent  = document.querySelector('.hero-content');
+const heroScroll   = document.querySelector('.hero-scroll');
+const orbs         = document.querySelectorAll('.orb');
+
 window.addEventListener('scroll', () => {
-  const sy = window.scrollY;
-  if (heroContent) heroContent.style.transform = `translateY(${sy * 0.25}px)`;
+  const sy         = window.scrollY;
+  const heroH      = heroSection ? heroSection.offsetHeight : window.innerHeight;
+  const progress   = Math.min(sy / (heroH * 0.55), 1); // 0 → 1 as you scroll half the hero
+
+  if (heroContent) {
+    const opacity   = 1 - progress;
+    const scale     = 1 - progress * 0.06;          // subtle shrink
+    const translateY = sy * 0.18;                    // gentle lift
+    const blur      = progress * 6;                  // soft blur-out
+    heroContent.style.opacity   = opacity;
+    heroContent.style.transform = `translateY(${translateY}px) scale(${scale})`;
+    heroContent.style.filter    = `blur(${blur}px)`;
+    heroContent.style.pointerEvents = progress > 0.8 ? 'none' : 'auto';
+  }
+
+  // Scroll indicator fades faster
+  if (heroScroll) {
+    heroScroll.style.opacity   = Math.max(0, 1 - progress * 3);
+  }
+
+  // Orbs drift at different speeds for depth
   orbs.forEach((orb, i) => {
-    const speed = 0.08 + i * 0.04;
+    const speed = 0.06 + i * 0.05;
     orb.style.transform = `translateY(${sy * speed}px)`;
   });
 }, { passive: true });
