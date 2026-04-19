@@ -94,7 +94,7 @@ function updateActiveLink() {
 }
 
 // ===== TYPED ROLES =====
-const roles = ['Avionics Engineer', 'Graphic Designer', 'Video Editor', 'Creative Freelancer'];
+const roles = ['Avionics Engineer', 'Graphic Designer', 'Video Editor', 'Creative Freelancer', 'Coder'];
 let ri = 0, ci = 0, deleting = false;
 const roleEl = document.getElementById('dynamicRole');
 
